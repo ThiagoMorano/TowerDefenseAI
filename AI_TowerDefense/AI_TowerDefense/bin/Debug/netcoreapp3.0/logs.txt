@@ -1,0 +1,12 @@
+# Tower 1 deployed at 5,5!
+# Tower 2 deployed at 6,6!
+# Tower 3 deployed at 5,5!
+# Tower 4 deployed at 0,0!
+# Tower 5 deployed at 5,5!
+# Tower 6 deployed at 6,6!
+# Tower 6 deployed at 0,0!
+# Tower 7 deployed at 5,5!
+# Tower 8 deployed at 1,1!
+# Tower 9 deployed at 4,4!
+# Tower 9 deployed at 2,2!
+# Tower 10 deployed at 2,2!

@@ -1,0 +1,24 @@
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections\obj\x86\Debug\tower-defence.csproj.AssemblyReference.cache
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections\obj\x86\Debug\tower-defence.csproj.CoreCompileInputs.cache
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections\bin\Debug\ConsoleApplication.exe
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections\bin\Debug\ConsoleApplication.pdb
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections\obj\x86\Debug\ConsoleApplication.pdb
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections-even-colls\bin\Debug\ConsoleApplication.exe
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections-even-colls\bin\Debug\ConsoleApplication.pdb
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections-even-colls\obj\x86\Debug\tower-defence.csproj.AssemblyReference.cache
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections-even-colls\obj\x86\Debug\tower-defence.csproj.CoreCompileInputs.cache
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections-even-colls\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections-even-colls\obj\x86\Debug\ConsoleApplication.pdb
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections-odd-colls\bin\Debug\ConsoleApplication.exe
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections-odd-colls\bin\Debug\ConsoleApplication.pdb
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections-odd-colls\obj\x86\Debug\tower-defence.csproj.AssemblyReference.cache
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections-odd-colls\obj\x86\Debug\tower-defence.csproj.CoreCompileInputs.cache
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections-odd-colls\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\root\Documents\Visual Studio 2019\Projects\tower-defence\roland\AI_TowerDefense-corrections-odd-colls\obj\x86\Debug\ConsoleApplication.pdb
+C:\Users\Thiago\Projects\AI_TowerDefense\bin\Debug\ConsoleApplication.exe
+C:\Users\Thiago\Projects\AI_TowerDefense\bin\Debug\ConsoleApplication.pdb
+C:\Users\Thiago\Projects\AI_TowerDefense\obj\x86\Debug\tower-defence.csproj.AssemblyReference.cache
+C:\Users\Thiago\Projects\AI_TowerDefense\obj\x86\Debug\tower-defence.csproj.CoreCompileInputs.cache
+C:\Users\Thiago\Projects\AI_TowerDefense\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\Thiago\Projects\AI_TowerDefense\obj\x86\Debug\ConsoleApplication.pdb
