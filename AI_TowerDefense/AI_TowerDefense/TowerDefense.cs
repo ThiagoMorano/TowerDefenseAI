@@ -17,9 +17,9 @@ namespace AI_TowerDefense
      */
     public class TowerDefense
     {
-        public static bool DISPLAY_LOG_MESSAGES = false;
+        public static bool DISPLAY_LOG_MESSAGES = true;
         public static int NORMAL_SPEED_MS = 500;
-        public static int FAST_SPEED_MS = 10;
+        public static int FAST_SPEED_MS = 1;
 
         private bool fastSpeedActivated = true;
 
@@ -51,7 +51,7 @@ namespace AI_TowerDefense
             // Your strategy should at least be able to beat random!
             
             playerAstrategy = new ThiagoStrategy(lane1, lane2, playerA);
-            playerBstrategy = new RandomStrategy(lane2, lane1, playerB);
+            playerBstrategy = new ThiagoStrategy(lane2, lane1, playerB);
         }
 
         public static TowerDefense Instance()
