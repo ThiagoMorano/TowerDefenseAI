@@ -20,11 +20,13 @@ namespace AI_Strategy
         {
             if (speed > 0 && posY < PlayerLane.HEIGHT - 1)
             {
+
                 if (_ShouldMoveForward())
                 {
                     _MoveForward();
                 }
             }
+            previousHealth = health;
         }
 
         private bool _IsCellSafeZone(int y)
@@ -37,9 +39,9 @@ namespace AI_Strategy
         private bool _ShouldMoveForward()
         {
             bool isBacked = lane.GetCellAt(posX, System.Math.Max(0, posY - 1)).Unit != null;
-            bool hasOtherThreeSoldiersAround = _GetNumberOfAdjacentSoldiers() >= 3;
+            bool hasOtherTwoSoldiersAround = _GetNumberOfAdjacentSoldiers() >= 2;
 
-            return _IsCellSafeZone(posY + 1) || isBacked || hasOtherThreeSoldiersAround || _IsBeingAttacked() || _AreReachableLanesFree();
+            return _IsCellSafeZone(posY + 1) || isBacked || hasOtherTwoSoldiersAround || _IsBeingAttacked() || _AreReachableLanesFree();
         }
 
         private int _GetNumberOfAdjacentSoldiers()
