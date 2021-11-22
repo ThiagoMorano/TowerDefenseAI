@@ -51,7 +51,7 @@ namespace AI_TowerDefense
             // Your strategy should at least be able to beat random!
             
             playerAstrategy = new ThiagoStrategy(lane1, lane2, playerA);
-            playerBstrategy = new RandomStrategy(lane2, lane1, playerB);
+            playerBstrategy = new ThiagoStrategy(lane2, lane1, playerB);
         }
 
         public static TowerDefense Instance()
