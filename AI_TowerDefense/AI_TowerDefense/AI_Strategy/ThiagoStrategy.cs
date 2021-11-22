@@ -9,17 +9,24 @@ namespace AI_Strategy
      */
     public class ThiagoStrategy : AbstractStrategy
     {
+        // State machine attributes
         private int EARLY_GAME_THRESHOLD = 300;
-        private int EARLY_DEFENSE = 11;
-        private int MID_DEFENSE = 9;
         private int END_GAME_THRESHOLD = 800;
-        private int END_DEFENSE = 7;
-
-
-        private static Random random = new Random();
         private bool _isInDefensiveState = false;
 
+        // Defending attributes
+        private int EARLY_DEFENSE = 11;
+        private int MID_DEFENSE = 9;
+        private int END_DEFENSE = 7;
+
+        // Attacking attributes
+        private int SOLDIER_COST = 2;
+        int ATTACK_PIVOT_LEFT = 0;
+        int ATTACK_PIVOT_RIGHT = PlayerLane.WIDTH - 2;
+        
+
         private int _turnCounter = 0;
+        private static Random random = new Random();
 
 
         public ThiagoStrategy(PlayerLane defendLane, PlayerLane attackLane, Player player) : base(defendLane, attackLane, player)
@@ -67,22 +74,32 @@ namespace AI_Strategy
             _EvaluateState();
             if (!_isInDefensiveState) return;
 
-            if (player.Gold > Tower.COSTS)
+            int count = 0;
+            while (count < 20) // deploys max 20 towers in a turn
             {
-                int deployX = 0;
-                int deployY = 3;
-
-                this._DecideTowerDeployment(out deployX, out deployY);
-
-                DebugLoger.Log(String.Format("Deploy at ({0}, {1})", deployX, deployY), true);
-
-                if (defendLane.GetCellAt(deployX, deployY).Unit == null)
+                if (player.Gold > Tower.COSTS)
                 {
-                    Tower tower = player.BuyTower(defendLane, deployX, deployY);
-                    if (tower != null)
+                    count++;
+
+                    int deployX = 0;
+                    int deployY = 3;
+
+                    this._DecideTowerDeployment(out deployX, out deployY);
+
+                    //DebugLoger.Log(String.Format("Deploy at ({0}, {1})", deployX, deployY), true);
+
+                    if (defendLane.GetCellAt(deployX, deployY).Unit == null)
                     {
-                        DebugLoger.Log(String.Format("Tower at ({0}, {1}) has been deployed", deployX, deployY), true);
+                        Tower tower = player.BuyTower(defendLane, deployX, deployY);
+                        if (tower != null)
+                        {
+                            //DebugLoger.Log(String.Format("Tower at ({0}, {1}) has been deployed", deployX, deployY), true);
+                        }
                     }
+                }
+                else
+                {
+                    break;
                 }
             }
 
@@ -125,7 +142,7 @@ namespace AI_Strategy
                 count++;
                 int x = random.Next(PlayerLane.WIDTH);
                 int y = rowIndex;
-                if (ValidTowerX(x) && defendLane.GetCellAt(x, y).Unit == null)
+                if (_ValidTowerX(x) && defendLane.GetCellAt(x, y).Unit == null)
                 {
                     return x;
                 }
@@ -134,31 +151,66 @@ namespace AI_Strategy
         }
 
 
-        /*
-         * example strategy for deploying Soldiers based on random placement and budget.
-         * Yours should be better!
-         */
+
         public override void DeploySoldiers()
         {
             if (_isInDefensiveState) return;
 
-            int round = 0;
-            while (player.Gold > 5 && round < 5)
+            // decide what corner to attack
+            int pivotPosition = _GetAttackPivot();
+
+            if (player.Gold > SOLDIER_COST * 2) // always spawns in pairs
             {
-                round++;
-                Boolean positioned = false;
-                int count = 0;
-                while (!positioned && count < 10)
+                for (int i = 0; i < 2; i++)
                 {
-                    count++;
-                    int x = 1;
+                    int x = pivotPosition + i;
                     int y = 0;
                     if (attackLane.GetCellAt(x, y).Unit == null)
                     {
-                        positioned = true;
                         Soldier soldier = player.BuySoldier(attackLane, x);
                     }
                 }
+            }
+        }
+
+        private int _GetAttackPivot()
+        {
+            int countPivotLeft = 0;
+            int countPivotRight = 0;
+
+            // scan two relevant tower lanes in each corner:
+            // select tower lane
+            // iterate through lane counting towers
+            for (int rowIndex = PlayerLane.HEIGHT - 1; rowIndex > PlayerLane.HEIGHT_OF_SAFETY_ZONE; rowIndex = rowIndex - 2)
+            {
+                if (attackLane.GetCellAt(ATTACK_PIVOT_LEFT, rowIndex).Unit != null && attackLane.GetCellAt(ATTACK_PIVOT_LEFT, rowIndex).Unit.Type == "T")
+                {
+                    countPivotLeft++;
+                }
+                if (attackLane.GetCellAt(ATTACK_PIVOT_LEFT + 2, rowIndex).Unit != null && attackLane.GetCellAt(ATTACK_PIVOT_LEFT + 2, rowIndex).Unit.Type == "T")
+                {
+                    countPivotLeft++;
+                }
+
+                if (attackLane.GetCellAt(ATTACK_PIVOT_RIGHT - 1, rowIndex).Unit != null && attackLane.GetCellAt(ATTACK_PIVOT_RIGHT - 1, rowIndex).Unit.Type == "T")
+                {
+                    countPivotRight++;
+                }
+                if (attackLane.GetCellAt(ATTACK_PIVOT_RIGHT + 1, rowIndex).Unit != null && attackLane.GetCellAt(ATTACK_PIVOT_RIGHT + 1, rowIndex).Unit.Type == "T")
+                {
+                    countPivotRight++;
+                }
+            }
+
+            //DebugLoger.Log(String.Format("TowerCountLeft = {0}; TowerCountRight = {1}", countPivotLeft, countPivotRight), true);
+            if (countPivotLeft < countPivotRight)
+            {
+                return ATTACK_PIVOT_LEFT;
+            }
+            else
+            {
+                return ATTACK_PIVOT_RIGHT;
+
             }
         }
 
@@ -174,16 +226,16 @@ namespace AI_Strategy
         }
 
 
-        bool ValidTowerPosition(int x, int y)
+        bool _ValidTowerPosition(int x, int y)
         {
-            if (ValidTowerX(x) && ValidTowerY(y))
+            if (_ValidTowerX(x) && _ValidTowerY(y))
             {
                 return true;
             }
             return false;
         }
 
-        bool ValidTowerX(int x)
+        bool _ValidTowerX(int x)
         {
             if (x % 2 == 0 && // x even
                 x >= 0 && x < PlayerLane.WIDTH)
@@ -193,7 +245,7 @@ namespace AI_Strategy
             return false;
         }
 
-        bool ValidTowerY(int y)
+        bool _ValidTowerY(int y)
         {
             if (y % 2 != 0 &&
                 y >= PlayerLane.HEIGHT_OF_SAFETY_ZONE && y < PlayerLane.HEIGHT) // y odd and leavin
