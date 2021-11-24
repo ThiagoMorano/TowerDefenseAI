@@ -3,15 +3,11 @@ using System;
 
 namespace AI_Strategy
 {
-    /*
-     * This class derives from Soldier and provides a new move method. Your assignment should
-     * do the same - but with your own movement strategy.
-     */
-    public class ThiagoSoldier : Soldier
+    public class TMG_Soldier : Soldier
     {
         int previousHealth = -1;
 
-        public ThiagoSoldier(Player player, PlayerLane lane, int x) : base(player, lane, x)
+        public TMG_Soldier(Player player, PlayerLane lane, int x) : base(player, lane, x)
         {
             previousHealth = health;
         }
