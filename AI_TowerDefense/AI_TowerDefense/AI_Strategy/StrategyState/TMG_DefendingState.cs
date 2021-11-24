@@ -92,8 +92,8 @@ namespace AI_Strategy
 
         bool _ValidTowerY(int y)
         {
-            if (y % 2 != 0 &&
-                y >= PlayerLane.HEIGHT_OF_SAFETY_ZONE && y < PlayerLane.HEIGHT) // y odd and leavin
+            if (y % 2 != 0 && // y odd 
+                y >= PlayerLane.HEIGHT_OF_SAFETY_ZONE && y < PlayerLane.HEIGHT) // and outside of safety zone
             {
                 return true;
             }

@@ -9,9 +9,9 @@ namespace AI_Strategy
         private const int _EARLY_GAME_TURN_THRESHOLD = 300;
         private const int _END_GAME_TURN_THRESHOLD = 800;
 
-        private const int _EARLY_DEFENSE_MIN_ROW = 11;
-        private const int _MID_DEFENSE_MIN_ROW = 9;
-        private const int _END_DEFENSE_MIN_ROW = 7;
+        private const int _AMOUNT_OF_EARLY_DEFENSE = 5;
+        private const int _AMOUNT_OF_MID_DEFENSE = 4;
+        private const int _AMOUNT_OF_END_DEFENSE = 3;
 
         private int _turnCounter = 0;
 
@@ -38,12 +38,11 @@ namespace AI_Strategy
             {
                 _currentState = _defendingState;
             }
-            //_isInDefensiveState = !_IsDefenseSet(_turnCounter);
         }
 
         private bool _IsDefenseSet(int currentTurn)
         {
-            for (int rowIndex = PlayerLane.HEIGHT - 1; rowIndex > PlayerLane.HEIGHT - _GetMaxDefenseRow(currentTurn); rowIndex = rowIndex - 2)
+            for (int rowIndex = PlayerLane.HEIGHT - 1; rowIndex > _GetMaxDefenseLineIndex(currentTurn); rowIndex = rowIndex - 2)
             {
                 if (!IsRowFullWithTowers(defendLane, rowIndex))
                 {
@@ -53,19 +52,19 @@ namespace AI_Strategy
             return true;
         }
 
-        private int _GetMaxDefenseRow(int currentTurn)
+        private int _GetMaxDefenseLineIndex(int currentTurn)
         {
             if (_turnCounter < _EARLY_GAME_TURN_THRESHOLD)
             {
-                return _EARLY_DEFENSE_MIN_ROW;
+                return PlayerLane.HEIGHT - 2 * _AMOUNT_OF_EARLY_DEFENSE;
             }
             else if (_turnCounter < _END_GAME_TURN_THRESHOLD)
             {
-                return _MID_DEFENSE_MIN_ROW;
+                return PlayerLane.HEIGHT - 2 * _AMOUNT_OF_MID_DEFENSE;
             }
             else
             {
-                return _END_DEFENSE_MIN_ROW;
+                return PlayerLane.HEIGHT - 2 * _AMOUNT_OF_END_DEFENSE;
             }
         }
 
