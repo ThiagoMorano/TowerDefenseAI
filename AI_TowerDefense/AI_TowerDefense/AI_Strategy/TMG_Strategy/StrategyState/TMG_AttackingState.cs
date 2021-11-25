@@ -62,14 +62,16 @@ namespace AI_Strategy
             }
 
             //DebugLoger.Log(String.Format("TowerCountLeft = {0}; TowerCountRight = {1}", countPivotLeft, countPivotRight), true);
+            
+            // Chooses the side with fewer towers
             if (countPivotLeft < countPivotRight)
             {
                 return ATTACK_PIVOT_LEFT;
             }
             else
             {
+                // Defaults to attacking in the right side if the number of towers are the same
                 return ATTACK_PIVOT_RIGHT;
-
             }
         }
 

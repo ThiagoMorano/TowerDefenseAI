@@ -25,19 +25,30 @@ namespace AI_Strategy
             previousHealth = health;
         }
 
+        // Defines the rule to decide whether the soldier can move
+        private bool _ShouldMoveForward()
+        {
+            return _IsCellSafeZone(posY + 1)
+                || _IsThereASoldierBehind()
+                || _HasOtherTwoSoldiersAround()
+                || _IsBeingAttacked()
+                || _AreReachableLanesFree();
+        }
+
         private bool _IsCellSafeZone(int y)
         {
             return y < PlayerLane.HEIGHT_OF_SAFETY_ZONE;
         }
 
-
-        // Only moves foward when backed by another soldier
-        private bool _ShouldMoveForward()
+        private bool _IsThereASoldierBehind()
         {
-            bool isBacked = lane.GetCellAt(posX, System.Math.Max(0, posY - 1)).Unit != null;
-            bool hasOtherTwoSoldiersAround = _GetNumberOfAdjacentSoldiers() >= 2;
+            return lane.GetCellAt(posX, System.Math.Max(0, posY - 1)).Unit != null;
+        }
 
-            return _IsCellSafeZone(posY + 1) || isBacked || hasOtherTwoSoldiersAround || _IsBeingAttacked() || _AreReachableLanesFree();
+
+        private bool _HasOtherTwoSoldiersAround()
+        {
+            return _GetNumberOfAdjacentSoldiers() >= 2;
         }
 
         private int _GetNumberOfAdjacentSoldiers()
