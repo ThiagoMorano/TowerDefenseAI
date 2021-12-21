@@ -29,10 +29,6 @@ namespace AI_Strategy
                     if (defendLane.GetCellAt(deployX, deployY).Unit == null)
                     {
                         Tower tower = player.BuyTower(defendLane, deployX, deployY);
-                        if (tower != null)
-                        {
-                            //DebugLoger.Log(String.Format("Tower at ({0}, {1}) has been deployed", deployX, deployY), true);
-                        }
                     }
                 }
                 else
@@ -61,7 +57,6 @@ namespace AI_Strategy
         private int _GetColumnToDeployTowerInRow(PlayerLane defendLane, int rowIndex)
         {
             return _DecidePositionToDeployTowerInRow(defendLane, rowIndex);
-            //return _PickTowerPositionInRowAccordingToPrecedence(defendLane, rowIndex);
             //return _DecideRandomTowerPositionInRow(defendLane, rowIndex);
         }
 

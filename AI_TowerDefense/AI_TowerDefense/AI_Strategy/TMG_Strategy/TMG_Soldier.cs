@@ -25,7 +25,7 @@ namespace AI_Strategy
             previousHealth = health;
         }
 
-        // Defines the rule to decide whether the soldier can move
+        // Defines the conditions in which a soldier can move
         private bool _ShouldMoveForward()
         {
             return _IsCellSafeZone(posY + 1)
